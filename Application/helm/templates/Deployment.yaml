@@ -37,20 +37,20 @@ spec:
               value: {{ .Values.containers.containerPort | quote }}
           readinessProbe:
               httpGet:
-                path: '{{ .Values.probes.readiness.path }}' # this check the application url path
+                path: '{{ .Values.probes.readiness_1.path }}' # this check the application url path
                 port: {{ .Values.containers.containerPort  }} # In which port the Application is listening
                 scheme: HTTP
-              initialDelaySeconds: {{ .Values.probes.readiness.initialDelaySeconds }} # the time is waiting befor testing the application path
-              timeoutSeconds: {{ .Values.probes.readiness.timeoutSeconds }} # the time for timeout
-              periodSeconds: {{ .Values.probes.readiness.periodSeconds }} # the abount of time to wait between checks
-              successThreshold: {{ .Values.probes.readiness.successThreshold }} # count to decalre seccessfull 
-              failureThreshold: {{ .Values.probes.readiness.failureThreshold }} # count to decalre failure 
+                  {{- tpl (toYaml .Values.Probes.readiness) . | nindent 14 }}
           livenessProbe:
               httpGet:
                 path: '{{ .Values.probes.liveness.path }}'
                 port: {{ .Values.containers.containerPort }}
                 scheme: HTTP
-            {{- tpl (toYaml .Values.probes.liveness) . | nindent 12 }}
+              initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
+              timeoutSeconds: {{ .Values.probes.liveness.timeoutSeconds }}
+              periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
+              successThreshold: {{ .Values.probes.liveness.successThreshold }}
+              failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
           imagePullPolicy: IfNotPresent
 # update with the image you build in part 1
           image: '{{ .Values.containers.image }}:{{ .Values.containers.tag }}'
