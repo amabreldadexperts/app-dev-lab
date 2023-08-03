@@ -4,8 +4,7 @@ metadata:
 # set your lab user name
   name: {{.Release.Name}}
 spec:
-  #replicas: {{ .Values.ReplicaNumber }}
-  replicas: 5
+  replicas: {{ .Values.ReplicaNumber }}
   selector:
     matchLabels:
 # set your lab user name
