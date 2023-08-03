@@ -64,5 +64,5 @@ spec:
     type: RollingUpdate
     rollingUpdate:
       maxUnavailable: 25%
-      maxSurge: 30%
+      maxSurge: 25%
   revisionHistoryLimit: 10
