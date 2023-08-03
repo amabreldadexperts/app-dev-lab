@@ -50,11 +50,7 @@ spec:
                 path: '{{ .Values.probes.liveness.path }}'
                 port: {{ .Values.containers.containerPort }}
                 scheme: HTTP
-              initialDelaySeconds: {{ .Values.probes.liveness.initialDelaySeconds }}
-              timeoutSeconds: {{ .Values.probes.liveness.timeoutSeconds }}
-              periodSeconds: {{ .Values.probes.liveness.periodSeconds }}
-              successThreshold: {{ .Values.probes.liveness.successThreshold }}
-              failureThreshold: {{ .Values.probes.liveness.failureThreshold }}
+            {{- tpl (toYaml .Values.probes.liveness) . | nindent 12 }}
           imagePullPolicy: IfNotPresent
 # update with the image you build in part 1
           image: '{{ .Values.containers.image }}:{{ .Values.containers.tag }}'
