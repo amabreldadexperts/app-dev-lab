@@ -26,7 +26,7 @@ spec:
           name:  {{ .Release.Name }}
           volumeMounts:
             - name: index-html
-              mountPath: {{ .Vloume.mount.path }} # this will mount the html.index file to it application location
+              mountPath: {{ .Values.volume.mount.path }} # this will mount the html.index file to it application location
           ports:
             - containerPort: {{ .Values.containers.containerPort }}
               protocol: TCP
